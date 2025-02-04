@@ -1,14 +1,13 @@
 package me.cyberword.hacklock.managers;
 
 import me.cyberword.hacklock.objects.HlPlayer;
-import org.bukkit.entity.Player;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
 public class PlayerManager {
-    private LinkedList<HlPlayer> _players = new LinkedList<>();
+    private ArrayList<HlPlayer> _players = new ArrayList<>();
 
     public void addPlayer(HlPlayer player) {
         _players.add(player);
