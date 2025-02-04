@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 public class PermanentlyRemovePlayerCommand implements CommandExecutor {
@@ -27,7 +28,10 @@ public class PermanentlyRemovePlayerCommand implements CommandExecutor {
         }
 
         HlPlayer player = optionalPlayer.get();
-        player.permanentlyRemovePlayer(args[1]);
+
+        String reason = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
+
+        player.permanentlyRemovePlayer(reason);
 
         return true;
     }
