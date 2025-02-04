@@ -1,6 +1,7 @@
 package me.cyberword.hacklock.managers;
 
 import me.cyberword.hacklock.objects.HlPlayer;
+import net.kyori.adventure.text.Component;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -47,5 +48,11 @@ public class PlayerManager {
 
     public void removePlayer(HlPlayer player) {
         _players.removeIf(hp -> hp.equals(player));
+    }
+
+    public void sendMessageToAdmins(Component message) {
+        for(HlPlayer player : _players) {
+            if (player.isAdmin()) player.sendMessage(message);
+        }
     }
 }
