@@ -1,8 +1,7 @@
 package me.cyberword.hacklock.listeners;
 
 import me.cyberword.hacklock.Hacklock;
-import me.cyberword.hacklock.detection.AntiKillAuraChecks;
-import me.cyberword.hacklock.managers.PlayerManager;
+import me.cyberword.hacklock.detection.KillAuraChecks;
 import me.cyberword.hacklock.objects.HlPlayer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
@@ -12,7 +11,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-import java.text.Format;
 import java.util.Optional;
 
 public class AntiKillAuraListener implements Listener {
@@ -22,7 +20,7 @@ public class AntiKillAuraListener implements Listener {
             Player attacker = (Player) event.getDamager();
             Entity attacked = event.getEntity();
 
-            boolean checkIfValid = AntiKillAuraChecks.checkIfHitIsValid(attacker, attacked);
+            boolean checkIfValid = KillAuraChecks.checkIfHitIsValid(attacker, attacked);
 
             if(!checkIfValid) {
                 Optional<HlPlayer> hacklockPlayerOptional = Hacklock.playerManager.getPlayerByUuid(attacker.getUniqueId());
@@ -40,7 +38,7 @@ public class AntiKillAuraListener implements Listener {
 
                 String templateString = "Player %s was detected with killaura, angle of attack was %f";
 
-                Hacklock.playerManager.sendMessageToAdmins(Component.text(templateString.formatted(attacker.getName(), AntiKillAuraChecks.getAngle(attacker, attacked))).color(TextColor.fromHexString("#10A0FF")));
+                Hacklock.playerManager.sendMessageToAdmins(Component.text(templateString.formatted(attacker.getName(), KillAuraChecks.getAngle(attacker, attacked))).color(TextColor.fromHexString("#10A0FF")));
             }
         }
     }

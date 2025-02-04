@@ -7,7 +7,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-public class AntiKillAuraChecks {
+public class KillAuraChecks {
 
     public static double getAngle(Player attaker, Entity attacked) {
         Vector lookDirection = attaker.getEyeLocation().getDirection();
