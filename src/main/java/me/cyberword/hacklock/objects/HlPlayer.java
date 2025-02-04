@@ -2,11 +2,11 @@ package me.cyberword.hacklock.objects;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
+
+// PlayerManager.getPlayerByName("Test1").get().removePlayer("Test1");
 
 public class HlPlayer {
     private Player _player;
@@ -23,8 +23,16 @@ public class HlPlayer {
         return _player.getUniqueId();
     }
 
+    public boolean isAdmin() {
+        return _player.hasPermission("hacklock.admin");
+    }
+
+    public boolean canBypass() {
+        return _player.hasPermission("hacklock.bypass");
+    }
+
     public void removePlayer(String reason) {
-        _player.kick(Component.text("[HACKLOCK]\nYou are removed (kicked) from  the server.\nReason: " + reason).color(TextColor.fromHexString("#A00000")));
+        _player.kick(Component.text("[HACKLOCK]\nYou are removed (kicked) from the server.\nReason: " + reason).color(TextColor.fromHexString("#FC3D03")));
     }
 
     public void permanentlyRemovePlayer(String reason) {
@@ -32,7 +40,7 @@ public class HlPlayer {
         _player.banPlayer(reason);
     }
 
-    void showMessage(String message) {
-        _player.sendMessage(Component.text("[HACKLOCK] " + message).color(TextColor.fromHexString("#A00000")));
+    public void sendMessage(Component message) {
+        _player.sendMessage(message);
     }
 }
