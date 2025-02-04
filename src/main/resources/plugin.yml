@@ -1,0 +1,26 @@
+name: Hacklock
+version: '1.0-SNAPSHOT'
+main: me.cyberword.hacklock.Hacklock
+api-version: '1.18'
+authors: [ CyberWord ]
+description: something
+
+permissions:
+  hacklock.remove:
+    description: "Allow removing (kicking) player using /remove command"
+    default: op
+  hacklock.permremove:
+    description: "Allow perm removing (banning) player using /permremove command"
+    default: op
+
+commands:
+  remove:
+    description: "Remove (kick) player"
+    aliases: [ rm, remove ]
+    permission: hacklock.remove
+    permission-message: "You do not have permission to use this command"
+  permremove:
+      description: "Permanently remove (ban) player"
+      aliases: [ permrm, permremove ]
+      permission: hacklock.permremove
+      permission-message: "You do not have permission to use this command"
