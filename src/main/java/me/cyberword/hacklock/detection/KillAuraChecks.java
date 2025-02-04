@@ -22,7 +22,7 @@ public class AntiKillAuraChecks {
         Location attackedPosition = attacked.getLocation();
 
         double distance = attakerPosition.distance(attackedPosition);
-        return distance > 1;
+        return distance > 0.1;
     }
 
     private static boolean angleCheck(Player attaker, Entity attacked) {
@@ -34,9 +34,9 @@ public class AntiKillAuraChecks {
     public static boolean checkIfHitIsValid(Player attaker, Entity attacked) {
         boolean isValidHit = true;
 
-        if (shouldUseAngleCheck(attaker, attacked)) {
+        //if (shouldUseAngleCheck(attaker, attacked)) {
             isValidHit = angleCheck(attaker, attacked);
-        }
+        //}
 
         return isValidHit;
     }
