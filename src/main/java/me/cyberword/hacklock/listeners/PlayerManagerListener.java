@@ -15,7 +15,7 @@ public class PlayerManagerListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        // Ignore that this would break if player does not exist. but it should :LIKE:
+        // Ignore that this would break if player does not exist. but it should exist :LIKE:
         // but who cares
         HlPlayer player = Hacklock.playerManager.getPlayerByUuid(event.getPlayer().getUniqueId()).get();
         Hacklock.playerManager.removePlayer(player);
