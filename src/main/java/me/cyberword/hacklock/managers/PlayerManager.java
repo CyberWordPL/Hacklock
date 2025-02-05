@@ -9,9 +9,14 @@ import java.util.UUID;
 
 public class PlayerManager {
     private ArrayList<HlPlayer> _players = new ArrayList<>();
+    private ArrayList<HlPlayer> _adminPlayers = new ArrayList<>();
 
     public void addPlayer(HlPlayer player) {
         _players.add(player);
+
+        if(player.isAdmin()) {
+            _adminPlayers.add(player);
+        }
     }
 
     public Optional<HlPlayer> getPlayerByUuid(UUID uuid) {
@@ -48,11 +53,14 @@ public class PlayerManager {
 
     public void removePlayer(HlPlayer player) {
         _players.removeIf(hp -> hp.equals(player));
+        _adminPlayers.removeIf(hp -> hp.equals(player));
     }
 
-    public void sendMessageToAdmins(Component message) {
-        for(HlPlayer player : _players) {
-            if (player.isAdmin()) player.sendMessage(message);
-        }
+    public ArrayList<HlPlayer> getPlayers() {
+        return _players;
+    }
+
+    public ArrayList<HlPlayer> getAdminPlayers() {
+        return _adminPlayers;
     }
 }

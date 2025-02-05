@@ -6,6 +6,16 @@ authors: [ CyberWord ]
 description: something
 
 permissions:
+  hacklock.admin:
+    description: "Admin perm"
+    default: op
+    children:
+      - hacklock.bypass
+      - hacklock.remove
+      - hacklock.permremove
+  hacklock.bypass:
+    description: "Allow bypassing anticheat"
+    default: op
   hacklock.remove:
     description: "Allow removing (kicking) player using /remove command"
     default: op

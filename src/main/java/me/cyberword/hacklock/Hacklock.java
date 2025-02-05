@@ -6,6 +6,7 @@ import me.cyberword.hacklock.commands.PermanentlyRemovePlayerCommand;
 import me.cyberword.hacklock.commands.RemovePlayerCommand;
 import me.cyberword.hacklock.listeners.AntiKillAuraListener;
 import me.cyberword.hacklock.listeners.PlayerManagerListener;
+import me.cyberword.hacklock.managers.MessageManager;
 import me.cyberword.hacklock.managers.PlayerManager;
 import me.cyberword.hacklock.objects.HlPlayer;
 import org.bukkit.Bukkit;
@@ -16,6 +17,7 @@ public final class Hacklock extends JavaPlugin {
     public static FileConfiguration configuration;
     public static Hacklock instance;
     public static ProtocolManager protocolManager;
+    public static MessageManager messageManager;
     public static PlayerManager playerManager;
 
     @Override
@@ -29,6 +31,7 @@ public final class Hacklock extends JavaPlugin {
 
         // Load Managers
         playerManager = new PlayerManager();
+        messageManager = new MessageManager();
         protocolManager = ProtocolLibrary.getProtocolManager();
 
         // Load Listeners & Events
