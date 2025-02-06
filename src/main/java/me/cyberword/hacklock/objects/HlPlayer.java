@@ -3,6 +3,7 @@ package me.cyberword.hacklock.objects;
 import me.cyberword.hacklock.Hacklock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
@@ -33,13 +34,15 @@ public class HlPlayer {
     }
 
     public void removePlayer(String reason) {
-        _player.kick(Component.text("[HACKLOCK]\nYou are removed (kicked) from the server.\nReason: " + reason).color(TextColor.fromHexString("#FC3D03")));
+        Bukkit.getScheduler().runTask(Hacklock.instance, () -> _player.kick(Component.text("[HACKLOCK]\nYou are removed (kicked) from the server.\nReason: " + reason).color(TextColor.fromHexString("#FC3D03"))));
         Hacklock.messageManager.getPlayerDetectionMessages().sendPlayerRemovedToAdminMessage(this);
     }
 
     public void permanentlyRemovePlayer(String reason) {
-        _player.kick(Component.text("[HACKLOCK]\nYou are permanently removed (banned) from the server.\nReason: " + reason).color(TextColor.fromHexString("#A00000")));
-        _player.banPlayer(reason);
+        Bukkit.getScheduler().runTask(Hacklock.instance, () -> {
+                    _player.kick(Component.text("[HACKLOCK]\nYou are permanently removed (banned) from the server.\nReason: " + reason).color(TextColor.fromHexString("#A00000")));
+                    _player.banPlayer(reason);
+                });
         Hacklock.messageManager.getPlayerDetectionMessages().sendPlayerPermanentlyRemovedToAdminMessage(this);
     }
 
