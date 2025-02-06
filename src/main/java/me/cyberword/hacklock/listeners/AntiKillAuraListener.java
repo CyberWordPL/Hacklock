@@ -6,13 +6,14 @@ import me.cyberword.hacklock.objects.HlPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import java.util.Optional;
 
 public class AntiKillAuraListener implements Listener {
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player attacker) {
             Entity attacked = event.getEntity();
@@ -30,10 +31,10 @@ public class AntiKillAuraListener implements Listener {
 
                 if(hacklockPlayer.canBypass()) return;
 
+                Hacklock.messageManager.getPlayerDetectionMessages().sendCheatDetectedToAdminMessage("Kill Aura", hacklockPlayer);
+
                 event.setCancelled(true);
                 hacklockPlayer.removePlayer("Kill Aura Detected!!!");
-
-                Hacklock.messageManager.getPlayerDetectionMessages().sendCheatDetectedToAdminMessage("Kill Aura", hacklockPlayer);
             }
         }
     }

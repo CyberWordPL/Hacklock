@@ -1,10 +1,11 @@
 package me.cyberword.hacklock;
 
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
+import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.event.PacketListenerPriority;
 import me.cyberword.hacklock.commands.PermanentlyRemovePlayerCommand;
 import me.cyberword.hacklock.commands.RemovePlayerCommand;
 import me.cyberword.hacklock.listeners.AntiKillAuraListener;
+import me.cyberword.hacklock.listeners.InvalidPitchPacketListener;
 import me.cyberword.hacklock.listeners.PlayerManagerListener;
 import me.cyberword.hacklock.managers.MessageManager;
 import me.cyberword.hacklock.managers.PlayerManager;
@@ -16,7 +17,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Hacklock extends JavaPlugin {
     public static FileConfiguration configuration;
     public static Hacklock instance;
-    public static ProtocolManager protocolManager;
     public static MessageManager messageManager;
     public static PlayerManager playerManager;
 
@@ -32,11 +32,14 @@ public final class Hacklock extends JavaPlugin {
         // Load Managers
         playerManager = new PlayerManager();
         messageManager = new MessageManager();
-        protocolManager = ProtocolLibrary.getProtocolManager();
 
         // Load Listeners & Events
         getServer().getPluginManager().registerEvents(new PlayerManagerListener(), this);
         getServer().getPluginManager().registerEvents(new AntiKillAuraListener(), this);
+
+        // Load Packet Listeners
+        PacketEvents.getAPI().getEventManager().registerListener(
+                new InvalidPitchPacketListener(), PacketListenerPriority.NORMAL);
 
         // Get players and add players into Player Manager
         Bukkit.getOnlinePlayers().forEach(player -> playerManager.addPlayer(new HlPlayer(player)));
